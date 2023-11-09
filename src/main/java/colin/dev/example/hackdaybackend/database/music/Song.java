@@ -16,4 +16,20 @@ public class Song {
     String artist;
     @Column
     String url;
+
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getArtist() {
+        return artist;
+    }
+
+    public String getUrl() {
+        return url;
+    }
 }

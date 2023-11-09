@@ -1,6 +1,6 @@
 debug: true
 server:
-  port: 3000
+  port: 4000
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
@@ -15,11 +15,13 @@ spring:
       open-in-view: false
       generate-ddl: true
       ddl-auto: create-drop
+    defer-datasource-initialization: true
 
   sql:
     init:
       platform: postgresql
-      mode: never
+      mode: always
+      data-locations: classpath:data.sql
     output:
       ansi:
         enabled: always

@@ -16,7 +16,17 @@ public class MusicService {
     @Autowired
     MusicRepository musicRepository;
 
-    public List<Song> getAllSongs() {
-        return musicRepository.getAll();
+    public List<SongDto> getAllSongs() {
+        return musicRepository.getAll().stream()
+                .map(song -> {
+                    return new SongDto(
+                            song.getId(),
+                            song.getName(),
+                            song.getArtist(),
+                            song.getUrl()
+                    );
+                }).toList();
+
+
     }
 }
