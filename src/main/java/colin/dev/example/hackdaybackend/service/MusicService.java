@@ -40,6 +40,14 @@ public class MusicService {
         return mapToDto(songs);
     }
 
+
+    public List<SongDto> postToPlaylist(String id, String songId) {
+        var song = musicRepository.findById(songId);
+
+        playlistRepository.addSong(id, song);
+        return getPlaylist();
+    }
+
     private List<SongDto> mapToDto(List<Song> songs) {
         return songs.stream()
                 .map(song -> {
@@ -51,4 +59,5 @@ public class MusicService {
                     );
                 }).toList();
     }
+
 }

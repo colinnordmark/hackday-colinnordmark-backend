@@ -1,10 +1,12 @@
 package colin.dev.example.hackdaybackend.web;
 
 import colin.dev.example.hackdaybackend.database.music.Song;
+import colin.dev.example.hackdaybackend.service.AddSongDto;
 import colin.dev.example.hackdaybackend.service.MusicService;
 import colin.dev.example.hackdaybackend.service.SongDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,9 +36,13 @@ public class Controller {
         return ResponseEntity.ok(musicService.getPlaylist());
     }
 
-    @PostMapping("/playlists/{id}")
-    ResponseEntity<List<SongDto>> postToPlaylist(@PathVariable String id) {
-        return ResponseEntity.badRequest().build();
+    @PostMapping(produces = {MediaType.APPLICATION_JSON_VALUE}, value = "/playlists/{playlistId}")
+    ResponseEntity<List<SongDto>> postToPlaylist(
+            @PathVariable String playlistId,
+            @RequestBody AddSongDto request
+
+    ) {
+        return ResponseEntity.ok(musicService.postToPlaylist(playlistId, request.songId()));
     }
 
     }

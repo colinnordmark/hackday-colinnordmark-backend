@@ -9,7 +9,7 @@ import jakarta.persistence.Table;
 @Table(name = "songs")
 public class Song {
     @Id
-    int id;
+    String id;
     @Column
     String name;
     @Column
@@ -17,7 +17,7 @@ public class Song {
     @Column
     String url;
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
