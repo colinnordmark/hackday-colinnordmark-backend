@@ -11,4 +11,12 @@ public class Playlist {
     int id;
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "playlist", cascade = {CascadeType.ALL, CascadeType.MERGE})
     List<ListedSong> listedSongs;
+
+    public int getId() {
+        return id;
+    }
+
+    public List<ListedSong> getListedSongs() {
+        return listedSongs;
+    }
 }

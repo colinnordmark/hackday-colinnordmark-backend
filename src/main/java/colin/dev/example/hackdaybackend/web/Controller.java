@@ -4,11 +4,9 @@ import colin.dev.example.hackdaybackend.database.music.Song;
 import colin.dev.example.hackdaybackend.service.MusicService;
 import colin.dev.example.hackdaybackend.service.SongDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -31,4 +29,14 @@ public class Controller {
         return ResponseEntity.ok(musicService.getAllSongs());
     }
 
-}
+    @GetMapping("/playlists/{id}")
+    ResponseEntity<List<SongDto>> getPlaylist(@PathVariable String id){
+        return ResponseEntity.ok(musicService.getPlaylist());
+    }
+
+    @PostMapping("/playlists/{id}")
+    ResponseEntity<List<SongDto>> postToPlaylist(@PathVariable String id) {
+        return ResponseEntity.badRequest().build();
+    }
+
+    }

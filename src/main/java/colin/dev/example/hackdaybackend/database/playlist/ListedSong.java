@@ -24,4 +24,8 @@ public class ListedSong {
     public ListedSong() {
 
     }
+
+    public Song getSong() {
+        return song;
+    }
 }
