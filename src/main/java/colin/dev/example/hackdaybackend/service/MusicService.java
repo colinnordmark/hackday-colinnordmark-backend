@@ -31,8 +31,8 @@ public class MusicService {
 
     }
 
-    public List<SongDto> getPlaylist() {
-        var songs = playlistRepository.findById("1").getListedSongs().stream()
+    public List<SongDto> getPlaylist(String id) {
+        var songs = playlistRepository.findById(id).getListedSongs().stream()
                 .map(ListedSong::getSong)
                 .toList();
 
@@ -45,7 +45,7 @@ public class MusicService {
         var song = musicRepository.findById(songId);
 
         playlistRepository.addSong(id, song);
-        return getPlaylist();
+        return getPlaylist(id);
     }
 
     private List<SongDto> mapToDto(List<Song> songs) {
@@ -60,4 +60,7 @@ public class MusicService {
                 }).toList();
     }
 
+    public void deleteSongFromPlaylist(String playlistId, String songId) {
+        playlistRepository.deleteSong(playlistId, songId);
+    }
 }

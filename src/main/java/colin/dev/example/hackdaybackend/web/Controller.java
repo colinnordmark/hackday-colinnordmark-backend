@@ -22,18 +22,18 @@ public class Controller {
     MusicService musicService;
 
     @GetMapping
-    ResponseEntity<String> helloWorld(){
+    ResponseEntity<String> helloWorld() {
         return ResponseEntity.ok("Hello world: ");
     }
 
     @GetMapping("/songs")
-    ResponseEntity<List<SongDto>> getAllSongs(){
+    ResponseEntity<List<SongDto>> getAllSongs() {
         return ResponseEntity.ok(musicService.getAllSongs());
     }
 
     @GetMapping("/playlists/{id}")
-    ResponseEntity<List<SongDto>> getPlaylist(@PathVariable String id){
-        return ResponseEntity.ok(musicService.getPlaylist());
+    ResponseEntity<List<SongDto>> getPlaylist(@PathVariable String id) {
+        return ResponseEntity.ok(musicService.getPlaylist(id));
     }
 
     @PostMapping(produces = {MediaType.APPLICATION_JSON_VALUE}, value = "/playlists/{playlistId}")
@@ -45,4 +45,13 @@ public class Controller {
         return ResponseEntity.ok(musicService.postToPlaylist(playlistId, request.songId()));
     }
 
+    @DeleteMapping(produces = {MediaType.APPLICATION_JSON_VALUE}, value = "/playlists/{playlistId}")
+    ResponseEntity<?> deleteFromPlaylist(
+            @PathVariable String playlistId,
+            @RequestBody AddSongDto request
+    ){
+        musicService.deleteSongFromPlaylist(playlistId, request.songId());
+        return ResponseEntity.noContent().build();
     }
+
+}

@@ -9,7 +9,8 @@ import java.util.List;
 public class Playlist {
     @Id
     int id;
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "playlist", cascade = {CascadeType.ALL, CascadeType.MERGE})
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "playlist", cascade = {CascadeType.ALL})
+    @Column
     List<ListedSong> listedSongs;
 
     public int getId() {
